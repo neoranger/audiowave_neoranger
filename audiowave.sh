@@ -1,11 +1,11 @@
 #!/bin/bash
 TITLE=""
 SUBTITLE=""
-WIDTH="640"
-HEIGHT="480"
+WIDTH="1920"
+HEIGHT="1080"
 MODE="line" # point, line, p2p, cline
-WAVE_WIDTH="640"
-WAVE_HEIGHT="480"
+WAVE_WIDTH="1920"
+WAVE_HEIGHT="1080"
 WAVE_COLOR="yellow"
 WAVE_X=-1
 WAVE_Y=-1
@@ -178,14 +178,14 @@ then
         [0:a]showwaves=size=${WAVE_WIDTH}x${WAVE_HEIGHT}:mode=${MODE}:colors=${WAVE_COLOR}:rate=30,format=rgba[top];\
         [1:v]setpts=PTS-STARTPTS, scale=${WIDTH}x${HEIGHT}, format=rgba[bottom];\
         [bottom][top]overlay=format=auto:y=${WAVE_Y}:x=${WAVE_X}[temporal];\
-        [temporal]drawtext=text='${TITLE}':fontcolor=${TEXT_COLOR}:fontsize=30:font=Ubuntu:x=${TEXT_X}:y=${TEXT_Y}[l1];\
-        [l1]drawtext=text='${SUBTITLE}':fontcolor=${TEXT_COLOR}:fontsize=30:font=Ubuntu:x=${TEXT_X}:y=${TEXT_Y2}[output]\
+        [temporal]drawtext=text='${TITLE}':fontcolor=${TEXT_COLOR}:fontsize=60:font=Ubuntu:x=${TEXT_X}:y=${TEXT_Y}[l1];\
+        [l1]drawtext=text='${SUBTITLE}':fontcolor=${TEXT_COLOR}:fontsize=55:font=Ubuntu:x=${TEXT_X}:y=${TEXT_Y2}[output]\
         " -map "[output]" -pix_fmt yuv420p -map 0:a -c:v libx264 -c:a libmp3lame -shortest output.mp4
 else
     ffmpeg -y -i ${AUDIO} -filter_complex "\
         [0:a]showwaves=size=${WAVE_WIDTH}x${WAVE_HEIGHT}:mode=${MODE}:colors=${WAVE_COLOR}:rate=30,format=rgba[top];\
-        [top]drawtext=text='${TITLE}':fontcolor=${TEXT_COLOR}:fontsize=30:font=Ubuntu:x=${TEXT_X}:y=${TEXT_Y}[l1];\
-        [l1]drawtext=text='${SUBTITLE}':fontcolor=${TEXT_COLOR}:fontsize=30:font=Ubuntu:x=${TEXT_X}:y=${TEXT_Y2}[output]\
+        [top]drawtext=text='${TITLE}':fontcolor=${TEXT_COLOR}:fontsize=60:font=Ubuntu:x=${TEXT_X}:y=${TEXT_Y}[l1];\
+        [l1]drawtext=text='${SUBTITLE}':fontcolor=${TEXT_COLOR}:fontsize=55:font=Ubuntu:x=${TEXT_X}:y=${TEXT_Y2}[output]\
         " -map "[output]" -pix_fmt yuv420p -map 0:a -c:v libx264 -c:a libmp3lame -shortest output.mp4
 fi
 
